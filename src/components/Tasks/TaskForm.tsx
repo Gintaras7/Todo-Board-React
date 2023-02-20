@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { TaskState } from "../interfaces/tasks";
+import { TaskState } from "../../interfaces/tasks";
 import { useForm } from "react-hook-form";
-import Button from "./common/Button";
-import TextField from "./common/TextField";
-import Teaxtarea from "./common/Textarea";
+import Button from "../common/Button";
+import TextField from "../common/TextField";
+import TextArea from "../common/TextArea";
 
 interface TaskFormProps {
   onSave: (event: any) => any;
@@ -30,13 +30,13 @@ const TaskForm: FC<TaskFormProps> = ({ onSave }): JSX.Element => {
         })}
       />
       <label className="mt-2 block">Description</label>
-      <Teaxtarea
+      <TextArea
         id="description"
         rows={4}
         register={register("description", {
-          required: true,
+          required: "Required",
         })}
-      ></Teaxtarea>
+      ></TextArea>
       <Button type="submit">Save</Button>
     </form>
   );

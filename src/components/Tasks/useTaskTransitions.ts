@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
-import { TaskState, TaskStateAndTitle, StateTransitionsMap } from "../interfaces/tasks"
+import { TaskState, TaskStateAndTitle, StateTransitionsMap } from "../../interfaces/tasks"
+
 
 interface TransitionToState {
   key: number;
   title: string;
 }
+
 const useTaskTransitions = (status: TaskState) => {
   const [allowedTransitionsList, setAllowedTransitions] = useState<TransitionToState[]>([]);
 
