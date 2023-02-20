@@ -1,18 +1,18 @@
-import { TaskInterface, TaskState } from "../interfaces/tasks";
-import { FC } from "react";
-import useTaskTransitions from "./useTaskTransitions";
-import Button from "./common/Button";
-interface TaskProps {
+import { TaskInterface, TaskState } from "../../interfaces/tasks";
+import useTaskTransitions from "../Tasks/useTaskTransitions";
+import Button from "../common/Button";
+
+type TaskProps = {
   task: TaskInterface;
   updateTask: (updatedTask: TaskInterface) => any;
-}
+};
 
-interface TransitionToState {
+type TransitionToState = {
   key: number;
   title: string;
-}
+};
 
-const Task: FC<TaskProps> = ({ task, updateTask }): any => {
+const Task = ({ task, updateTask }: TaskProps): any => {
   const [allowedTransitionsList] = useTaskTransitions(task.status);
 
   const updateState = (transitTo: TaskState): void => {
@@ -29,7 +29,7 @@ const Task: FC<TaskProps> = ({ task, updateTask }): any => {
       <div className="bg-dark-600">
         {allowedTransitionsList.map(
           (transition: TransitionToState, key: number) => (
-            <Button onClick={() => updateState(transition.key)}>
+            <Button key={key} onClick={() => updateState(transition.key)}>
               {transition.title}
             </Button>
           )
