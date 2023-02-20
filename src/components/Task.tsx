@@ -2,7 +2,6 @@ import { TaskInterface, TaskState } from "../interfaces/tasks";
 import { FC } from "react";
 import useTaskTransitions from "./useTaskTransitions";
 import Button from "./common/Button";
-
 interface TaskProps {
   task: TaskInterface;
   updateTask: (updatedTask: TaskInterface) => any;
