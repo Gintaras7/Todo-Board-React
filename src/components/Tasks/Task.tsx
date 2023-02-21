@@ -1,6 +1,6 @@
 import { TaskInterface, TaskState } from "../../interfaces/tasks";
 import useTaskTransitions from "../Tasks/useTaskTransitions";
-import Button from "../common/Button";
+import Button from "../common/buttons/Button";
 
 type TaskProps = {
   task: TaskInterface;

@@ -35,7 +35,7 @@ const TasksBoard = () => {
     return {
       title,
       list,
-      updateTask: (a: any) => updateTask(a),
+      updateTask: (task: any) => updateTask(task),
     };
   };
 
