@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import TaskColumn from "../components/Tasks/TaskColumn";
 import TaskForm from "../components/Tasks/TaskForm";
-import { filterByState, removeTaskById, getMaxId } from "../utils/tasksUtils";
-import { TaskStateAndTitle } from "../interfaces/tasks";
-import { TaskInterface, TaskState } from "../interfaces/tasks";
+import {
+  filterByState,
+  removeTaskById,
+  getMaxId,
+} from "../components/Tasks/utils/taskList";
+import { TaskStateAndTitle } from "../components/Tasks/types/TaskInterfaces";
+import {
+  TaskInterface,
+  TaskState,
+} from "../components/Tasks/types/TaskInterfaces";
 import TasksLayout from "../layouts/TasksLayout";
 import useLocalStorage from "../utils/useLocalStorage";
-import { DEFAULT_TASKS_LOCAL_STORAGE_KEY } from "../interfaces/settings";
+import { DEFAULT_TASKS_LOCAL_STORAGE_KEY } from "../types/settings";
 
 const TasksBoard = () => {
   const { load, saveStorage } = useLocalStorage(

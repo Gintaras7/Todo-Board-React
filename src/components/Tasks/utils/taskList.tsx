@@ -1,4 +1,4 @@
-import { TaskInterface, TaskState } from "../interfaces/tasks";
+import { TaskInterface, TaskState } from "../types/TaskInterfaces";
 
 const removeTaskById = (
   allTasks: TaskInterface[],
