@@ -5,7 +5,7 @@ interface Props extends React.ComponentPropsWithoutRef<"textarea"> {
   register: UseFormRegisterReturn;
 }
 
-const TextArea = ({ register, ...rest }: Props) => {
+const Textarea = ({ register, ...rest }: Props) => {
   return (
     <textarea
       className={`block bg-gray-200 border-2 rounded-sm p-2 w-full md:w-1/2`}
@@ -14,4 +14,4 @@ const TextArea = ({ register, ...rest }: Props) => {
     ></textarea>
   );
 };
-export default TextArea;
+export default Textarea;

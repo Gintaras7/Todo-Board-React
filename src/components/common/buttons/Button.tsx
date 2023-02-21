@@ -1,17 +1,5 @@
 import React, { ReactNode } from "react";
-
-enum Variant {
-  BLUE = 1,
-}
-enum Size {
-  SMALL = 1,
-}
-const SIZE_MAPS: Record<Size, string> = {
-  [Size.SMALL]: "mr-1 px-3 py-1.5 text-sm my-2",
-};
-const VARIANT_MAPS: Record<Variant, string> = {
-  [Variant.BLUE]: "bg-sky-600 hover:bg-sky-500 text-white",
-};
+import { Size, Variant, SIZE_MAPS, VARIANT_MAPS } from "./buttonCustimizations";
 
 type Props = {
   variant: Variant;
@@ -24,12 +12,12 @@ export default function Button(
 ) {
   const { children, variant, size, ...rest } = props;
 
-  const getClassname = () => {
+  const getClassName = () => {
     return `rounded-md  ${SIZE_MAPS[size]} ${VARIANT_MAPS[variant]}`;
   };
 
   return (
-    <button className={getClassname()} {...rest}>
+    <button className={getClassName()} {...rest}>
       {children}
     </button>
   );
