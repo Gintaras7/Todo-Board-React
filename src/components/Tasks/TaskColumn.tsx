@@ -1,4 +1,4 @@
-import { TaskInterface } from "../../interfaces/tasks";
+import { TaskInterface } from "./types/TaskInterfaces";
 import Task from "./Task";
 
 interface TaskProps {
