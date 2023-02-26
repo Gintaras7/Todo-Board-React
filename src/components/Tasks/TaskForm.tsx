@@ -1,4 +1,4 @@
-import { TaskState } from "./types/TaskInterfaces";
+import { TaskState } from "./types/taskTypes";
 import { useForm } from "react-hook-form";
 import Button from "../common/buttons/Button";
 import TextField from "../common/TextField";

@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { TaskState, TaskStateAndTitle, StateTransitionsMap } from "../types/TaskInterfaces"
+import { TaskState, TaskStateAndTitle, StateTransitionsMap } from "../types/taskTypes"
 
 const useTaskTransitions = (status: TaskState) => {
 
