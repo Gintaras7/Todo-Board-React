@@ -1,4 +1,4 @@
-import { TaskInterface, TaskState } from "./types/TaskInterfaces";
+import { TaskInterface, TaskState } from "./types/taskTypes";
 import useTaskTransitions from "./hooks/useTaskTransitions";
 import Button from "../common/buttons/Button";
 
@@ -17,7 +17,6 @@ const Task = ({ task, updateTask }: TaskProps): any => {
 
   const updateState = (transitTo: TaskState): void => {
     const updatedTaskState = { ...task, status: transitTo };
-
     updateTask(updatedTaskState);
   };
 

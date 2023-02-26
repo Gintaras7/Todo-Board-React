@@ -6,14 +6,16 @@ import {
   removeTaskById,
   getMaxId,
 } from "../components/Tasks/utils/taskList";
-import { TaskStateAndTitle } from "../components/Tasks/types/TaskInterfaces";
-import {
-  TaskInterface,
-  TaskState,
-} from "../components/Tasks/types/TaskInterfaces";
+import { TaskStateAndTitle } from "../components/Tasks/types/taskTypes";
+import { TaskInterface, TaskState } from "../components/Tasks/types/taskTypes";
 import TasksLayout from "../layouts/TasksLayout";
 import useLocalStorage from "../utils/useLocalStorage";
 import { DEFAULT_TASKS_LOCAL_STORAGE_KEY } from "../types/settings";
+
+interface TitleAndKey {
+  key: TaskState;
+  title: string;
+}
 
 const TasksBoard = () => {
   const { load, saveStorage } = useLocalStorage(
@@ -22,56 +24,45 @@ const TasksBoard = () => {
   const [tasks, setTasks] = useState<TaskInterface[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  useEffect(() => initList(), [isLoaded]);
-  useEffect(() => onTaskListUpdated(), [tasks]);
-
-  const initList = () => {
+  useEffect(() => {
     if (isLoaded) return;
 
     const loadedTasks = load();
     setTasks(loadedTasks as TaskInterface[]);
     setIsLoaded(true);
-  };
+  }, [isLoaded, load]);
 
-  const onTaskListUpdated = () => {
-    if (!isLoaded) return;
-    saveStorage(tasks);
-  };
-
-  const propsForColumn = (title: string, list: TaskInterface[]) => {
+  const getColumnProps = ({ key, title }: TitleAndKey) => {
     return {
       title,
-      list,
+      list: filterByState(tasks, key),
       updateTask: (task: any) => updateTask(task),
     };
   };
 
   const addTask = (task: TaskInterface) => {
     const newTask = { ...task, id: getMaxId(tasks) };
-    setTasks([...tasks, newTask]);
+    const newList = [...tasks, newTask];
+    setTasks(newList);
+    saveStorage(newList);
   };
 
   const updateTask = (task: TaskInterface) => {
-    const newList = removeTaskById(tasks, task);
-    setTasks([...newList, task]);
+    const filteredList = removeTaskById(tasks, task);
+    const newList = [...filteredList, task];
+    setTasks(newList);
+    saveStorage(newList);
   };
 
   return (
     <TasksLayout>
       <span className="block text-2xl mb-2 ml-0">Add task</span>
       <TaskForm onSave={addTask} />
-
       <span className="block text-2xl my-6 ml-0">Tasks board</span>
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {TaskStateAndTitle().map(
-          (keyAndTitlePair: { key: TaskState; title: string }, key: number) => (
-            <TaskColumn
-              key={key}
-              {...propsForColumn(
-                keyAndTitlePair.title,
-                filterByState(tasks, keyAndTitlePair.key)
-              )}
-            />
+          (titleAndKeyPair: TitleAndKey, index: number) => (
+            <TaskColumn key={index} {...getColumnProps(titleAndKeyPair)} />
           )
         )}
       </div>
